@@ -6,7 +6,7 @@ const db = new sqlite3.Database("./db.sqlite");
 const app = express();
 const csurf = require('csurf');
 const cookieParser = require('cookie-parser');
-// Require validator
+const validator = require('validator');
 
 const PORT = 4001;
 
@@ -64,20 +64,19 @@ app.post('/submit', (req, res) => {
 });
 
 app.post('/track', (req, res) => {
-   // Validate form submission is an integer
-
-   // Change the query to a prepared statement
-    db.all(
-      `SELECT * FROM Employee WHERE EmployeeId = '${req.body.customerId}'`, (err, rows) => {
+  db.all(
+      `SELECT * FROM Employee WHERE EmployeeId = ?`,
+      [req.body.customerId], (err, rows) => {
         if (rows) {
+          validator.isInt(req.body.customerId)
           res.status(200);
           res.json(rows);
         } else {
           res.status(200);
-          res.json({ message: "No employees" });
+          res.json({ message: "Invalid customerId" });
         }
       }
     ); 
-})
+});
 
 app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`) );
