@@ -1,3 +1,5 @@
+## XSS
+
 A web application allows users to post public messages that are displayed to other users. These messages are saved in a backend database. Unfortunately, it appears as if a hacker has figured out a way to inject arbitrary JavaScript into these messages. Their code impacts any user who loads the public messages. What type of XSS attack would this be considered?
 
 a. Dynamic XSS
@@ -11,3 +13,12 @@ a. Mirrored XSS
 b. DOM Based XSS
 c. Stored XSS
 d. Reflected XSS
+
+## CORS
+
+How does CORS manage requests from external resources?
+
+a. By making a call to an external server.
+b. By adding new HTTP headers to the standard list of headers (e.g. `Access-Control-Allow-Origin`).
+c. By adding a new HTTP footers to the standard list of footers (`Access-Control-Request-Method`).
+d. By allowing OAuth.
