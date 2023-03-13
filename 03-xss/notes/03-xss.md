@@ -33,3 +33,57 @@ The DOM, short for Document Object Model, is used to help scripts and the underl
 For example, a web page may use client-side Javascript to customize a welcome page, displaying their name based on a value in the URL. Depending on how the Javascript runs, a DOM-Based XSS attack may be able to replace the name value with a malicious script. If a victim loaded the page with the attacker’s code, the vulnerable webpage may execute the code!
 
 **TODO: add DOM-based  xss image**
+
+## Identifiying XSS Vulnerabilities
+
+Let’s look at how we can uncover XSS vulnerabilities in a web application.
+
+As with any vulnerability, it is important that we investigate any potential input areas. When looking at the application, consider all possible fields. Comments, usernames, custom settings, and parameters all provide great starting points.
+
+Once we have identified a potential injection point, we can begin testing various inputs to create a proof-of-concept payload (POC). A POC payload will demonstrate that an issue exists, without causing damage. The most basic POC payload is shown below.
+
+```html
+<script> alert(1); </script>
+```
+
+If a web server is not properly sanitizing user input, this will return a pop-up box similar to the below image.
+
+**TODO: add DOM-based  xss image**
+
+If this payload does not work, that does not necessarily mean the system is secure. In fact, many systems will take a flawed approach to protection and block certain words. If a blocklist is in effect your request may be blocked, or your `<script>` tags could be removed. There are numerous other ways we can execute code, without ever using a `<script>` tag. Below are some potential workarounds that could be used by an attacker.
+
+```html
+<img src="X" onerror=alert(1);>
+```
+
+```html
+<b onmouseover=alert(1);>click me!</b>
+```
+
+```html
+<body onload=alert('test1')>
+```
+
+## Preventing XSS Vulnerabilitites
+
+Similar to SQL Injectiions, XSS is preventable with input sanitization and application-level firewalls
+
+### Sanitization
+
+Sanitization is the process of removing/replacing problematic characters with safe versions. Depending on the backend language, there may or may not be built-in functions to aid in this process.
+
+However, if these functions do not exist, we can generally succeed in preventing XSS attacks by removing characters such as `<`, `>`, `"`, `=`, and potentially dangerous keywords.
+
+Rather than remove characters, we can also replace them with HTML-encoded versions of the characters. This allows us to retain the characters, but remove their capacity to affect the page’s HTML.
+
+For example, the `<` character would be converted to the “<” string. The browser will render this string as the “<” character, but it will not interpret it as actual HTML, preventing the attack.
+
+It is important to note, however, that depending on how the data is used, this type of escaping may not be enough. It’s important to consider all potential avenues for an attack.
+
+There are also JavaScript packages like **sanitize-html** that help sanitizer user inputs!
+
+## Conclusion
+
+Cross-site scripting attacks are some of the most common attacks on the web. Make sure that when you are building any web application that you employ techniques to counter the many clever ways attackers can exploit user input vulnerabilities. [OWASP has a great cheatsheet you can refer to](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html).
+
+This security should be at the foundation of how you write any web code!
