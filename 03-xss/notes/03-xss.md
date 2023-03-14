@@ -87,3 +87,25 @@ There are also JavaScript packages like **sanitize-html** that help sanitizer us
 Cross-site scripting attacks are some of the most common attacks on the web. Make sure that when you are building any web application that you employ techniques to counter the many clever ways attackers can exploit user input vulnerabilities. [OWASP has a great cheatsheet you can refer to](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html).
 
 This security should be at the foundation of how you write any web code!
+
+## Review
+
+XSS Attacks are still very common and it’s important to be aware of them so you don’t fall victim to one. We’ve looked at what can happen behind the scenes if an attacker successfully injects malicious code into a vulnerable site, but that’s not the only way to create an XSS attack. That’s why it’s important to never click suspicious links or submit private data into any unknown application!
+
+Let’s break down what we’ve learned so far:
+
+- How DOM-Based, Reflected, and Stored XSS attacks are different from each other and how they can be used to retrieve vulnerable data.
+
+- How an attacker can inject malicious code into a vulnerable application using `<script>` tags and Javascript.
+
+- How a user can be tricked into submitting their private information using cookies.
+
+- How to use `express-validator` and its built-in methods in order to validate input data.
+
+- Why it’s important to use data validation packages in order to sanitize data in an application to prevent malicious code injection.
+
+- How to use secure cookies in `express-session` to prevent an XSS attack.
+
+- How to use `helmet` to secure HTTP headers and protect yourself from numerous types of attacks, including XSS attacks.
+
+When creating an application, there is no silver bullet. It’s important to consider all possible ways an attacker might inject malicious code into your app, and take the appropriate measures to protect yourself and your users.
