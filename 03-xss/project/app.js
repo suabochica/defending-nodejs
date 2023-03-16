@@ -1,7 +1,8 @@
 const express = require("express");
 const session = require("express-session");
+const helmet = require("express-session");
 
-const { validationResult  } = require("express-validator");
+const { validationResultm check } = require("express-validator");
 
 const PORT = process.env.PORT || 4001;
 const app = express()
@@ -9,6 +10,7 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true  }));
 app.use(express.static("public"));
+app.use(helmet());
 
 app.set("view engine", "ejs");
 app.set("trust proxy", 1);
@@ -23,6 +25,8 @@ app.use(
       maxAge: 300000000,
       sameSite: 'none'
       // Add the appropiate properties below
+      https: true,
+      secure: true,
     },
   })
 );
@@ -46,6 +50,19 @@ app.post(
   "/review",
   [
     // Add the middleware to validate email and restaurant info below
+    check('email').isEmail(),
+    check('restaurant')
+      .not()
+      .isEmpty()
+      .trim()
+      .escape(),
+    check('rating')
+      .not()
+      .isEmpty()
+      .trim()
+      .escape(),
+    check('review').isInt(),
+  ],
   ],
   (req, res) => {
     var error = validationResutl(req).array();

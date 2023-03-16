@@ -12,11 +12,12 @@
 
 
 <script>
-  document.write("<b>Current URL</b> : " + document.baseURI);
+  document.getElementById("urlinfo").textContent("Current URL: " + document.baseURI);
 </script>
 
 
 <body>
+<span id="urlinfo"><span/>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Restreview</a>
