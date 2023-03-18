@@ -95,4 +95,22 @@ fs.unlinkSync(filePath);
 We use the `join()` method of the `path` method to combine our desired directory with the user-provided file name. Hiding the directory the server is operating on makes it tougher to reach valuable information.
 
 
+## Danger an secure use of regular expressions
+
+Regular Expressions are used in almost every single programming language to validate whether user input adheres to an expected condition. Attackers can make use of insecure regex expressions to trigger a Regular expression Denial of Service (ReDoS).
+
+The RegEx engine can take a large amount of time on poorly defined Regex expressions. Consider the RegEx `([0-9]+)+\#`. The table below shows how the number of backtracking steps increases exponentially as the location of the unmatched character increases.
+
+|        String        | Number of Digits | Number of Steps |
+|:--------------------:|:----------------:|:---------------:|
+| 123#                 | 3                | 6               |
+| 123456789123456789…# | 180              | 6               |
+| 1c#                  | 1                | 5               |
+| 1234567o#            | 7                | 755             |
+| 123456789123456d#    | 15               | 196587          |
+| 1234567891234567e#   | 16               | TIMEOUT ERROR   |
+
+To prevent this danger, we can use the `validator` npm package. It provides a library of string validators and sanitizers for things like IP addresses, emails, and phone numbers. For Regex expression we must write ourselves, we can use tools like the `safe-regex` npm package to detect dangerous regular expressions.
+
+We encourage you to take a look at some examples in the `safe-regex` documentation.
 
