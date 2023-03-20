@@ -114,3 +114,40 @@ To prevent this danger, we can use the `validator` npm package. It provides a li
 
 We encourage you to take a look at some examples in the `safe-regex` documentation.
 
+## Secure Your Code: Strict Mode
+
+Now that you have learned about some dangerous functions and regular expressions to avoid, let’s learn about some defensive tools. One of them is JavaScript’s strict mode. Using strict mode throws errors that would otherwise be silent, which can help reveal vulnerabilities. To invoke strict mode, simply put "use strict"; in single or double quotes on top of your JavaScript file.
+
+For example, strict mode catches assignments to undefined variables:
+
+```js
+// Runs fine without strict mode
+x = "codecademy";
+```
+
+```js
+// Throws “ReferenceError” with strict mode
+"use strict";
+x = "codecademy";
+```
+
+```js
+// Runs fine with strict mode if the variable is declared with let, var, or const
+"use strict";
+var x = "codecademy";
+```
+
+We are going to use strict mode to find the errors in the workspace code!
+
+## Secure Your Code: Static Code Analysis
+
+Static Code Analysis evaluates a code without executing it. A lint, or linter, is a static code analysis tool used to improve source code by finding and flagging programming errors, bugs, and patterns that may compromise security. Some of the most popular JavaScript linters are:
+
+- ESLint
+- JSLint
+- JSHint
+
+We can customize the linter rules to fit our needs using configuration files or third-party plugins. `eslint-plugin-security` is a plugin that adds rules to detect several security vulnerabilities including all of the aforementioned security risks in this lesson.
+
+Linter configuration and usage are beyond the scope of this introductory lesson, but we can see some of their power in the following instructions.
+
