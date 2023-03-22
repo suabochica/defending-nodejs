@@ -2,7 +2,7 @@ import fs from "fs";
 // Import safe-eval
 
 
-export default function calculator_callback(request, response, response) {
+export default function calculator_callback(request, response) {
     const expression = request.query?.expressionChooser;
     let content = "";
 

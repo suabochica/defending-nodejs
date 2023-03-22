@@ -5,8 +5,9 @@ import express from "express";
 import fs from "fs";
 import path from "path";
 
-hostname = "localhost";
-port = process.env.PORT || 4001;
+const hostname = "localhost";
+const port = process.env.PORT || 4001;
+
 app = express();
 app.use(express.static(path.resolve() + "/public"));
 
@@ -49,7 +50,4 @@ app.get('/regex', regex_callback);
 app.listen(port, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
 })
-
-delete hostname;
-delete port;
 
