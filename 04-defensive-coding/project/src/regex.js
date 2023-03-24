@@ -7,8 +7,9 @@ export default function regex_callback(request, response) {
 
     if (regex) {
         content = fs.readFileSync("public/regex.html", "utf8");
-        // Convert exec to execFile
+
         const result = safe(regex) ? "SAFE" : "NOT SAFE";
+
         content = content.replace("&gt;", '&gt; <code style="color: darkred;">' + regex + "</code> is " + result);
         response.send(content);
     } else {

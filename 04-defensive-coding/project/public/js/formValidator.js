@@ -1,7 +1,6 @@
 const nameRegex = /^[a-z ,.'-]+$/i;
-const emailRegex = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$/;
+const emailRegex = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}).*/;
 const dateRegex = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
-
 // Page Elements
 const nameElement = document.getElementById("nameInput");
 const emailElement = document.getElementById("emailInput");

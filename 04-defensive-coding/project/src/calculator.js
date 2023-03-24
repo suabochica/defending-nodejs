@@ -1,5 +1,6 @@
 import fs from "fs";
 // Import safe-eval
+import safeEval from "safe-eval"l
 
 
 export default function calculator_callback(request, response) {
@@ -10,7 +11,7 @@ export default function calculator_callback(request, response) {
         try {
             content = fs.readFileSync("public/calculator.html", "utf8");
             // Replace eval with safe-eval;
-            const answer = eval(expression);
+            const answer = safeEval(expression);
             content = content.replace("&gt;", "&gt; " + answer)
             response.send(content);
         } catch (e) {

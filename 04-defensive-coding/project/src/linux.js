@@ -1,6 +1,6 @@
 import fs from "fs";
 // Import execFile
-import { exec } from "child_process";
+import { exec, execFile } from "child_process";
 
 export default function linux_callback(request, response) {
     const command = request.query?.commandChooser;
@@ -9,7 +9,7 @@ export default function linux_callback(request, response) {
     if (command) {
         content = fs.readFileSync("public/linux.html", "utf8");
         // Convert exec to execFile
-        exec(command, (error, stdout, stderr) => {
+        execFile(command, (error, stdout, stderr) => {
             if (error || stderr) {
                 content = content.replace("&gt;", "&gt; " + (error ? error + "<br/>" : "") + stderr)
             } else {
