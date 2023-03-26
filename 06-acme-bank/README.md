@@ -55,19 +55,40 @@ password: C0deC@demy_Rocks!
 
 ## Protect against XSS attacks
 
-[Text]
+The application is currently vulnerable to several different kinds of XSS attacks, particularly in the forum where users can upload code via the comment box. Let’s add layers of security to prevent any attacks.
 
 ### Securing your headers
 
-[List]
+1. Require the helmet package and implement the middleware.
+> NOTE: The package is already included in the application.
+
+2. Secure the application’s cookies by adding the appropriate properties/values.
 
 ### Sanitize and validate inputs on the public forum
 
 [List]
 
+Next, we’ll make use of `express-validator` in order to sanitize and validate any input data. This prevents an attacker from manipulating data before it reaches our database/backend server.
+
+1. Require the `express-validator` package.
+
+Protect the POST request for `"/public_forum"` by validating the `req.body.comment`. When choosing an `express-validator` method to validate comment input, make sure to consider which restrictions are reasonable. Users need to have some freedom in what they can type into the input field, but shouldn’t be able to attack our system.
+
+Your code should look as follows:
+
+```
+var comment = // your validation code;
+```
+
+> NOTE: We’ll be making use of this variable in the next following tasks related to SQL injection.
+
+Awesome, this page is looking a lot safer already!
+
 ## Protect against SQL Injections
 
-[Text]
+1. Update the `POST` request for `"/auth"`, which is currently vulnerable to SQL injections.
+
+2. Update the SQL query to use prepared statements instead of string interpolation for the `username` and `password`. SQL can use variables in order to prevent any direct manipulation of the database.
 
 ### Address vulnerability on the public forum page
 
