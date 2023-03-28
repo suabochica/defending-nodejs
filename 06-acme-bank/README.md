@@ -66,8 +66,6 @@ The application is currently vulnerable to several different kinds of XSS attack
 
 ### Sanitize and validate inputs on the public forum
 
-[List]
-
 Next, we’ll make use of `express-validator` in order to sanitize and validate any input data. This prevents an attacker from manipulating data before it reaches our database/backend server.
 
 1. Require the `express-validator` package.
@@ -92,15 +90,45 @@ Awesome, this page is looking a lot safer already!
 
 ### Address vulnerability on the public forum page
 
-[List]
+![Image text]("description editor")
 
+1. Protect the POST request for "/public_forum" by using SQL parameters for the request queries comment and username.
 ### Address vulnerability on the public ledger page
 
-[List]
+![Image text]("description editor")
+
+Here, users can take advantage of this search query feature to inject SQL queries.
+
+1. Protect the GET request for "/public_ledger" by using SQL parameters for the request queries, id and amount.
+
+2. Make sure to parse the value from the request as an integer to make sure the data is standardized.
+
+Now, every SQL query is a little safer from malicious user input!
 
 ## Path traversal protection
 
 [Text]
+
+The POST request for the "/download" endpoint allows you to download personal records. The user input combined with the use of fs in the code means there’s a file path traversal vulnerability!
+
+```
+if(request.session.loggedin) {
+    file_name = request.session.file_history;
+    response.render("download", { file_name });
+} ...
+```
+
+1. Use the built-in package, path, in order to set the path starting from the current working directory followed by the string "/history_files/", and then the variable file_name. Store this value in a variable called root_directory.
+
+Your code should look as follows:
+
+```
+const root_directory = // your code to set the path;
+```
+
+2. Create a variable called rootDir and assign it to "history_files\\". Normalize the filePath variable and store the value in a variable called fileName.
+
+3. Within the try/catch block, check if the filename variable contains the value of rootDir. If it doesn’t, set the response to response.end("File not found");. Otherwise, return the content.
 
 ## Bonus: Adding a linter
 
