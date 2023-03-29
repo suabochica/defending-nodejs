@@ -107,33 +107,51 @@ Now, every SQL query is a little safer from malicious user input!
 
 ## Path traversal protection
 
-[Text]
+The `POST` request for the `"/download"` endpoint allows you to download personal records. The user input combined with the use of `fs` in the code means there’s a file path traversal vulnerability!
 
-The POST request for the "/download" endpoint allows you to download personal records. The user input combined with the use of fs in the code means there’s a file path traversal vulnerability!
-
-```
-if(request.session.loggedin) {
+```js
+if (request.session.loggedin) {
     file_name = request.session.file_history;
     response.render("download", { file_name });
 } ...
 ```
 
-1. Use the built-in package, path, in order to set the path starting from the current working directory followed by the string "/history_files/", and then the variable file_name. Store this value in a variable called root_directory.
+1. Use the built-in package, `path`, in order to set the path starting from the current working directory followed by the string `"/history_files/"`, and then the variable `file_name`. Store this value in a variable called `root_directory`.
 
 Your code should look as follows:
 
-```
+```js
 const root_directory = // your code to set the path;
 ```
 
-2. Create a variable called rootDir and assign it to "history_files\\". Normalize the filePath variable and store the value in a variable called fileName.
+2. Create a variable called rootDir and assign it to `"history_files\\"`. Normalize the `filePath` variable and store the value in a variable called `fileName`.
 
-3. Within the try/catch block, check if the filename variable contains the value of rootDir. If it doesn’t, set the response to response.end("File not found");. Otherwise, return the content.
+3. Within the `try/catch` block, check if the `filename` variable contains the value of `rootDir`. If it doesn’t, set the response to `response.end("File not found");`. Otherwise, return the content.
 
 ## Bonus: Adding a linter
 
-[Text]
+You can install a linter package in order to have a consistent format across all your JavaScript files. One popular package is eslint.
+
+1. Install `eslint` with `npm` by using this terminal command:
+
+```
+npm install eslint --save-dev
+```
+
+2. From here you can configure an eslint file with the following command:
+
+```
+npx eslint --init
+```
+
+This will create an `.eslintrc` file for you where you can set all the rules for your syntax and formatting rules.
 
 ## Review
 
-[Text]
+Congratulations on securing Acme Bank!
+
+If you’ve had trouble, this is the project walkthrough video:
+
+- https://youtu.be/d0pWvLyngHM
+
+As you can see, there are various ways that an attacker can penetrate a site and retrieve important data. It’s always important to take different measures when securing an application since there’s no silver bullet. We secured HTTP headers, validated and sanitized user inputs, used prepared SQL statements, static code analysis tools, and implemented various middleware to prevent common web attacks! Apply these techniques in your future web development practice!
