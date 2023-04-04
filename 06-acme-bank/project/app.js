@@ -200,12 +200,12 @@ app.post("/public_forum", function (request, response) {
 //SQL UNION INJECTION
 app.get("/public_ledger", function (request, response) {
   if (request.session.loggedin) {
-    var id = request.query.id;
+    var id = parseInt(request.query.id);
     if (id) {
       db.all(
-        `SELECT * FROM public_ledger WHERE from_account = '${id}'`,
+        'SELECT * FROM public_ledger WHERE from_account = ?', [id],
         (err, rows) => {
-          console.log("PROCESSING INPU");
+          console.log("PROCESSING INPUT");
           console.log(err);
           if (rows) {
             response.render("ledger", { rows });
