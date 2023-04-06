@@ -102,3 +102,8 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Ignore vim temporary files
+*~
+*.swo
+*.swp

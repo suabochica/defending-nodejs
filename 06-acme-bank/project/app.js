@@ -93,7 +93,7 @@ app.get("/home", function (request, response) {
 app.get("/transfer", csrfMiddleware, function (request, response) {
   if (request.session.loggedin) {
     var sent = "";
-    response.render("transfer", { sent });
+    response.render("transfer", { sent, csrfTocken: request.crsfTocken() });
   } else {
     response.redirect("/");
   }
@@ -151,15 +151,23 @@ app.post("/download", function (request, response) {
   if (request.session.loggedin) {
     var file_name = request.body.file;
 
+    // Change the filePath to current working directory using the "path" method
+
+    const rootDirectory = "history_files\\";
+    const filePath = path.join(process.cwd() + "history_files/" + file_name);
+    const fileName = path.normalize(filePath);
+    console.log(filePath);
+
     response.statusCode = 200;
     response.setHeader("Content-Type", "text/html");
 
-    // Change the filePath to current working directory using the "path" method
-    const filePath = "history_files/" + file_name;
-    console.log(filePath);
     try {
-      content = fs.readFileSync(filePath, "utf8");
-      response.end(content);
+      if (fileName.indexOf(rootDirectory) < 0) {
+        reponse.end("File not found")
+      } else {
+        content = fs.readFileSync(filePath, "utf8");
+        response.end(content);
+      }
     } catch (err) {
       console.log(err);
       response.end("File not found");
