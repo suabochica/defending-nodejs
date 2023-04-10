@@ -107,3 +107,6 @@ dist
 *~
 *.swo
 *.swp
+
+# Ignore jet brains set up files
+*.idea

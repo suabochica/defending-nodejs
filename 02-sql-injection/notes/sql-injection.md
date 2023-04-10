@@ -181,19 +181,51 @@ If there’s a 5-second delay before a response from the server, an attacker cou
 
 ### Out-of-Band SQL Injections
 
-'TODO'
+Out-of-Band injections are generally the rarest and most difficult injections to execute for attackers. Unlike the other methods, which return the results via the web application, an out-of-band injection will leverage a new channel to retrieve information from a query.
 
-## SQL Injection Prevetion
+Generally, these SQL injections will cause the database server to send HTTP or DNS requests containing SQL query results to an attacker-controlled server. From there, the attacker could review the log files to identify the query results.
+
+Again, these injections are extremely difficult to execute. They rely on permissions to database functions that are most often disabled, and would have to bypass firewalls that might stop requests to the attacker’s server.
+
+## SQL Injection Prevention
 
 There are two main methods for preventing injection attacks: sanitization and prepared statements.
 
 ### Sanitization
 
-'TODO'
+Sanitization is the process of removing dangerous characters from user input. When it comes to SQL injections, we would want to escape dangerous characters such as:
+
+- `'`
+- `;`
+- `\--`
+
+These sorts of characters can allow attackers to extend queries to output more data from a database.
+
+While this does provide a layer of protection, this method isn’t perfect. If a user finds a way to bypass your sanitization process, they can easily inject data into your system.
+
+Additionally, depending on your query, removing certain characters may have no effect! Therefore, this shouldn’t be your only defense mechanism.
 
 ### Prepared Statements
 
-'TODO'
+Writing prepared statements (also known as parameterized queries) in backend code is a common, reliable, and secure solution against SQL injections. Prepared statements are nearly foolproof.
+
+How does it work? We provide the database the query we want to execute in advance.
+
+1. First, a SQL query template is sent to the database. Certain values, called parameters, are left unspecified. For example, user input.
+2. The database processes the query and performs optimizations.
+3. Values are bound to the parameters and the SQL query is executed.
+4. Then we pass in the parameters/user input. Any input, regardless of whether the content has SQL syntax, is then treated only as a parameter and will not be treated as SQL code.
+
+Here is an example of what a prepared statement looks like in PHP web application backend code:
+
+```js
+$username= $_GET['user'];
+$stmt = $conn->prepare("SELECT * FROM Users WHERE name = '?'");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+```
+
+In addition to providing added security, prepared statements also make queries far more efficient.
 
 ## Conclusion
 
