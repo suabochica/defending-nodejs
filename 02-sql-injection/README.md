@@ -18,16 +18,17 @@ For web applications, SQL is the most common solution for storing and interactin
 
 What does a relational database look like? It is a collection of tables each with rows and columns. Take a look at the image below:
 
-'TODO: Use table format'
-orders 	items
+| orders       |       |    |
+|--------------|-------|----|
+| order_number | int   | PK |
+| item_id      | int   | FK |
+| cost         | float |    |
 
-order_number	int	PK
-item_id	int	FK
-cost	float
-
-item_id	int	PK
-price	int
-description	longtext
+| items       |          |    |
+|-------------|----------|----|
+| item_id     | int      | PK |
+| price       | int      |    |
+| description | longtext |    |
 
 In this database, we have two separate tables - the orders and items tables. In the orders table, we have three separate rows - the order_number, item_id, and cost. In this diagram, there is a relationship between the item_id field in the orders table to the item_id field in the items table. The item_id field is the primary key (PK) in the items table. A primary key is used to relate one table to another table.
 
