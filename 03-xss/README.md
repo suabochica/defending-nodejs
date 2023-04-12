@@ -8,7 +8,8 @@ We will walk through different types of such attacks: Stored XSS, Reflected XSS,
 
 ## Stored XSS
 
-A stored XSS vulnerabiliy occurs when a web server stores and unsanitized user inpyt and displas it to other users. In a worst-case scenario, an attacker can input malicious script and store it to the vulnarable website, making the script for all other users on that page.
+A stored XSS vulnerability occurs when a web server stores and unsanitized user input and display it to other users. In a worst-case scenario, an attacker can input malicious script and store it to the vulnerable website, making the script for all other users on that page.
+
 
 **TODO: add image stored**
 
@@ -64,9 +65,9 @@ If this payload does not work, that does not necessarily mean the system is secu
 <body onload=alert('test1')>
 ```
 
-## Preventing XSS Vulnerabilitites
+## Preventing XSS Vulnerabilities
 
-Similar to SQL Injectiions, XSS is preventable with input sanitization and application-level firewalls
+Similar to SQL Injections, XSS is preventable with input sanitization and application-level firewalls
 
 ### Sanitization
 

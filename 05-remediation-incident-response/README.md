@@ -36,7 +36,7 @@ Let’s look at an imaginary company responding to an incident: a ransomware att
 
 #### The Security Team
 
-The security team is investigating how the malware got in, making sure it can’t come back, and collecting malware samples to be analysed. They’re also investigating what exactly the malware did: if it stole information in addition to encrypting it for ransom, they need to know. If the analysis yields information about who is responsible, it can be passed onto law enforcement. Because the attack was small, law enforcement isn’t directly involved, but the security team is still communicating with them.
+The security team is investigating how the malware got in, making sure it can’t come back, and collecting malware samples to be analyzed. They’re also investigating what exactly the malware did: if it stole information in addition to encrypting it for ransom, they need to know. If the analysis yields information about who is responsible, it can be passed onto law enforcement. Because the attack was small, law enforcement isn’t directly involved, but the security team is still communicating with them.
 
 #### IT, PR, and Legal
 

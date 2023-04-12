@@ -30,7 +30,7 @@ safeEval(user_input);
 
 Take a look at their documentation for more examples!
 
-    Note: While packages like `safe-eval` may be safer than using `eval`, they may still contain vulnerabilities. 
+    Note: While packages like `safe-eval` may be safer than using `eval`, they may still contain vulnerabilities.
 
 Best practices with eval are:
 

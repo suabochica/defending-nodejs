@@ -110,3 +110,6 @@ dist
 
 # Ignore jet brains set up files
 *.idea
+
+# Ignore .vscode files
+*.vscode
